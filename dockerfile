@@ -20,8 +20,8 @@ RUN pip install --no-cache-dir python-multipart
 COPY main.py .
 COPY model_rice_disease.pth .
 
-# Exposer le port sur lequel l'API va écouter
+# Exposer le port (purement indicatif pour Docker)
 EXPOSE 8000
 
-# Commande pour lancer l'API au démarrage du conteneur
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Commande dynamique pour Render et le développement local
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
