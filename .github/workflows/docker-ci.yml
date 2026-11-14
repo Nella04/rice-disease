@@ -1,0 +1,27 @@
+name: CI/CD Docker Pipeline
+
+# Déclenche le workflow à chaque push sur la branche main
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Récupérer le code source du projet
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Configurer Docker Buildx (recommandé pour les builds modernes)
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    # 3. Tester la construction de l'image Docker (sans forcément l'envoyer sur un registre pour l'instant)
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: false # Mettre à true si vous voulez l'envoyer sur Docker Hub par la suite
+        tags: rice-disease-api:latest
