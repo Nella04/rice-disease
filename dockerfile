@@ -9,10 +9,15 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copier et installer les exigences Python
+# Copier les fichiers de configuration
 COPY requirements.txt .
+
+# 1. Installer pip et installer PyTorch depuis le serveur spécifique CPU
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# 2. Installer le reste des paquets (FastAPI, uvicorn, etc.) depuis le dépôt officiel PyPi
+RUN pip install --no-cache-dir -r requirements.txt
 # S'assurer que python-multipart est bien inclus
 RUN pip install --no-cache-dir python-multipart
 
