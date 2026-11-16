@@ -1,4 +1,3 @@
-```python
 from fastapi import FastAPI, File, UploadFile, HTTPException
 import torch
 import torch.nn as nn
