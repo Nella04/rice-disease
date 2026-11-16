@@ -1,6 +1,7 @@
-fastapi
-uvicorn
+--index-url https://download.pytorch.org/whl/cpu
 torch
 torchvision
-Pillow
+fastapi
+uvicorn
 python-multipart
+pillow
