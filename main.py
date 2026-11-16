@@ -89,4 +89,3 @@ async def predict(file: UploadFile = File(...)):
         "prediction": class_names[predicted.item()],
         "confidence": f"{confidence.item() * 100:.2f}%"
     }
-```
